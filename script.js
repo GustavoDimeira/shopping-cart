@@ -18,6 +18,7 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(item) {
   item.target.remove();
+  saveCartItems(document.getElementsByClassName('cart__items')[0]);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -28,8 +29,8 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-const addCarrinho = async (prodClick) => {
-  const clicked = prodClick.target.parentNode;
+const addCarrinho = async (prodClicked) => {
+  const clicked = prodClicked.target.parentNode;
   const productId = getSkuFromProductItem(clicked);
   const item = await fetchItem(productId);
   const pai = document.getElementsByClassName('cart__items')[0];
@@ -39,6 +40,7 @@ const addCarrinho = async (prodClick) => {
     salePrice: item.price,
   };
   pai.appendChild(createCartItemElement(objPassado));
+  saveCartItems(pai);
 };
 
 function createProductItemElement({ sku, name, image }) {
@@ -70,4 +72,5 @@ const criarIcone = async () => {
 
 window.onload = () => {
   criarIcone();
+  getSavedCartItems(cartItemClickListener);
 };
