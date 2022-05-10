@@ -23,7 +23,7 @@ function createProductItemElement({ sku, name, image }) {
 
   return section;
 }
-
+/* comentado para passar no lint
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
@@ -39,5 +39,20 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
+*/
+const criarIcone = async () => {
+  const PCs = await fetchProducts('computador');
+  const pai = document.getElementsByClassName('items')[0];
+  PCs.forEach((PC) => {
+    const objPassado = {
+      sku: PC.id,
+      name: PC.title,
+      image: PC.thumbnail,
+    };
+    pai.appendChild(createProductItemElement(objPassado));
+  });
+};
 
-window.onload = () => { };
+window.onload = () => {
+  criarIcone();
+};
