@@ -1,3 +1,10 @@
+let price = 0;
+function precoTela(valor) {
+  const total = document.getElementsByClassName('total-price')[0];
+  price += valor;
+  total.innerText = price;
+}
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -17,6 +24,10 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(item) {
+  const oItem = item.target.innerText;
+  const string = oItem.split('PRICE: $')[1];
+  const numero = parseFloat(string) * -1;
+  precoTela(numero);
   item.target.remove();
   saveCartItems(document.getElementsByClassName('cart__items')[0]);
 }
@@ -41,6 +52,7 @@ const addCarrinho = async (prodClicked) => {
   };
   pai.appendChild(createCartItemElement(objPassado));
   saveCartItems(pai);
+  precoTela(item.price);
 };
 
 function createProductItemElement({ sku, name, image }) {
