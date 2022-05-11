@@ -5,6 +5,17 @@ function precoTela(valor) {
   total.innerText = price;
 }
 
+function remover() {
+  const suja = document.getElementsByClassName('cart__items')[0];
+  suja.innerHTML = '';
+  precoTela(price * -1);
+}
+
+function esvaziarCarrinho() {
+  const botao = document.getElementsByClassName('empty-cart')[0];
+  botao.addEventListener('click', remover);
+}
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -68,7 +79,7 @@ function createProductItemElement({ sku, name, image }) {
 
   return section;
 }
-//  minhas funcoes
+
 const criarIcone = async () => {
   const PCs = await fetchProducts('computador');
   const pai = document.getElementsByClassName('items')[0];
@@ -85,4 +96,5 @@ const criarIcone = async () => {
 window.onload = () => {
   criarIcone();
   getSavedCartItems(cartItemClickListener);
+  esvaziarCarrinho();
 };
