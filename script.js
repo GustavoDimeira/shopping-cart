@@ -1,13 +1,14 @@
 let price = 0;
+const totalPrice = document.getElementsByClassName('total-price')[0];
 function precoTela(valor) {
-  const total = document.getElementsByClassName('total-price')[0];
   price += valor;
-  total.innerText = price;
+  totalPrice.innerText = price;
 }
 
 function remover() {
   const suja = document.getElementsByClassName('cart__items')[0];
   suja.innerHTML = '';
+  localStorage.clear();
   precoTela(price * -1);
 }
 
