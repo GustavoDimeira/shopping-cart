@@ -6,7 +6,7 @@ const getSavedCartItems = (eventListener, teste) => {
     cartSection.innerHTML = localStorage.getItem('items');
     const items = cartSection.childNodes;
     items.forEach((item) => item.addEventListener('click', eventListener));
-  };
+  }
 };
 
 if (typeof module !== 'undefined') {

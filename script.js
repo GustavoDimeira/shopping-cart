@@ -80,13 +80,13 @@ function createProductItemElement({ sku, name, image }) {
 
   return section;
 }
-const addTextoCarregando = () =>  {
+const addTextoCarregando = () => {
   const pai = document.getElementsByClassName('items')[0];
   const p = document.createElement('p');
-  p.className = 'loading'
-  p.innerText = 'Carregando'
+  p.className = 'loading';
+  p.innerText = 'Carregando';
   pai.appendChild(p);
-}
+};
 const criarIcone = async () => {
   const PCs = await fetchProducts('computador');
   const pai = document.getElementsByClassName('items')[0];
