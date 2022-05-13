@@ -41,7 +41,7 @@ function cartItemClickListener(item) {
   const numero = parseFloat(string) * -1;
   precoTela(numero);
   item.target.remove();
-  saveCartItems(document.getElementsByClassName('cart__items')[0]);
+  saveCartItems(document.getElementsByClassName('cart__items')[0].innerHTML);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -63,7 +63,7 @@ const addCarrinho = async (prodClicked) => {
     salePrice: item.price,
   };
   pai.appendChild(createCartItemElement(objPassado));
-  saveCartItems(pai);
+  saveCartItems(pai.innerHTML);
   precoTela(item.price);
 };
 
@@ -80,10 +80,18 @@ function createProductItemElement({ sku, name, image }) {
 
   return section;
 }
-
+const addTextoCarregando = () =>  {
+  const pai = document.getElementsByClassName('items')[0];
+  const p = document.createElement('p');
+  p.className = 'loading'
+  p.innerText = 'Carregando'
+  pai.appendChild(p);
+}
 const criarIcone = async () => {
   const PCs = await fetchProducts('computador');
   const pai = document.getElementsByClassName('items')[0];
+  const removido = document.getElementsByClassName('loading')[0];
+  removido.remove();
   PCs.forEach((PC) => {
     const objPassado = {
       sku: PC.id,
@@ -95,6 +103,7 @@ const criarIcone = async () => {
 };
 
 window.onload = () => {
+  addTextoCarregando();
   criarIcone();
   getSavedCartItems(cartItemClickListener);
   esvaziarCarrinho();

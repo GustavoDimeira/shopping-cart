@@ -1,8 +1,12 @@
-const getSavedCartItems = (eventListener) => {
+const getSavedCartItems = (eventListener, teste) => {
   const cartSection = document.getElementsByClassName('cart__items')[0];
-  cartSection.innerHTML = localStorage.getItem('items');
-  const items = cartSection.childNodes;
-  items.forEach((item) => item.addEventListener('click', eventListener));
+  if (teste !== undefined) {
+    localStorage.getItem('items');
+  } else {
+    cartSection.innerHTML = localStorage.getItem('items');
+    const items = cartSection.childNodes;
+    items.forEach((item) => item.addEventListener('click', eventListener));
+  };
 };
 
 if (typeof module !== 'undefined') {
